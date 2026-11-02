@@ -1,0 +1,184 @@
+{
+  "combined": "nse-mtbt-ticker-bench-combined-r2",
+  "tickers": "nse-mtbt-ticker-bench-tickers-r2",
+  "pairs": [
+    {
+      "requested_rate": 100,
+      "events": 10000,
+      "actual_rate_combined": 85.36421371316492,
+      "actual_rate_tickers": 86.2914590465158,
+      "actual_rates_within_five_percent_of_each_other": true,
+      "both_rates_within_five_percent": false,
+      "deltas": {
+        "send_to_matching_commit": {
+          "mean_ms": {
+            "combined": 2.8973072689999997,
+            "tickers": 5.138176802,
+            "difference_ms": 2.2408695330000006,
+            "change_percent": 77.34317850841663
+          },
+          "p50_ms": {
+            "combined": 2.415542,
+            "tickers": 4.522458,
+            "difference_ms": 2.1069160000000005,
+            "change_percent": 87.22332296436991
+          },
+          "p95_ms": {
+            "combined": 3.784042,
+            "tickers": 7.131458,
+            "difference_ms": 3.3474160000000004,
+            "change_percent": 88.46138599941544
+          },
+          "p99_ms": {
+            "combined": 7.636333,
+            "tickers": 11.380041,
+            "difference_ms": 3.7437080000000007,
+            "change_percent": 49.02494430245512
+          }
+        },
+        "matching_process": {
+          "mean_ms": {
+            "combined": 2.1930569156,
+            "tickers": 2.1914375047,
+            "difference_ms": -0.0016194109000000623,
+            "change_percent": -0.07384262982326195
+          },
+          "p50_ms": {
+            "combined": 2.003208,
+            "tickers": 2.011209,
+            "difference_ms": 0.008001000000000147,
+            "change_percent": 0.39940934740676504
+          },
+          "p95_ms": {
+            "combined": 3.164709,
+            "tickers": 3.37925,
+            "difference_ms": 0.21454099999999965,
+            "change_percent": 6.779169901561244
+          },
+          "p99_ms": {
+            "combined": 5.40625,
+            "tickers": 5.368208,
+            "difference_ms": -0.03804199999999991,
+            "change_percent": -0.7036670520231159
+          }
+        },
+        "send_to_all_outcomes_stored": {
+          "mean_ms": {
+            "combined": 4.0157824213,
+            "tickers": 6.0470026839,
+            "difference_ms": 2.0312202625999998,
+            "change_percent": 50.58093416182761
+          },
+          "p50_ms": {
+            "combined": 3.444125,
+            "tickers": 5.373583,
+            "difference_ms": 1.929458,
+            "change_percent": 56.02171814321488
+          },
+          "p95_ms": {
+            "combined": 5.428375,
+            "tickers": 8.359834,
+            "difference_ms": 2.9314589999999994,
+            "change_percent": 54.002514564671735
+          },
+          "p99_ms": {
+            "combined": 10.995083,
+            "tickers": 14.568916,
+            "difference_ms": 3.5738330000000005,
+            "change_percent": 32.503920161403066
+          }
+        }
+      }
+    },
+    {
+      "requested_rate": 1000,
+      "events": 10000,
+      "actual_rate_combined": 498.317884125774,
+      "actual_rate_tickers": 500.8449286002767,
+      "actual_rates_within_five_percent_of_each_other": true,
+      "both_rates_within_five_percent": false,
+      "deltas": {
+        "send_to_matching_commit": {
+          "mean_ms": {
+            "combined": 41.492974050899996,
+            "tickers": 82.9815498136,
+            "difference_ms": 41.4885757627,
+            "change_percent": 99.98939992058753
+          },
+          "p50_ms": {
+            "combined": 11.008833,
+            "tickers": 63.160292,
+            "difference_ms": 52.151459,
+            "change_percent": 473.7237725379248
+          },
+          "p95_ms": {
+            "combined": 150.391834,
+            "tickers": 215.663958,
+            "difference_ms": 65.27212400000002,
+            "change_percent": 43.401375103916905
+          },
+          "p99_ms": {
+            "combined": 170.495125,
+            "tickers": 235.715167,
+            "difference_ms": 65.220042,
+            "change_percent": 38.25331780014238
+          }
+        },
+        "matching_process": {
+          "mean_ms": {
+            "combined": 1.6598014617999999,
+            "tickers": 2.5222682012,
+            "difference_ms": 0.8624667394000003,
+            "change_percent": 51.96204240383566
+          },
+          "p50_ms": {
+            "combined": 1.489666,
+            "tickers": 2.4275,
+            "difference_ms": 0.9378340000000003,
+            "change_percent": 62.955991477284186
+          },
+          "p95_ms": {
+            "combined": 2.648625,
+            "tickers": 3.692292,
+            "difference_ms": 1.0436670000000001,
+            "change_percent": 39.404105904006805
+          },
+          "p99_ms": {
+            "combined": 3.922083,
+            "tickers": 4.90075,
+            "difference_ms": 0.9786670000000002,
+            "change_percent": 24.95273557443838
+          }
+        },
+        "send_to_all_outcomes_stored": {
+          "mean_ms": {
+            "combined": 42.3069454613,
+            "tickers": 84.9609256065,
+            "difference_ms": 42.653980145199995,
+            "change_percent": 100.82027827846245
+          },
+          "p50_ms": {
+            "combined": 11.771917,
+            "tickers": 65.650625,
+            "difference_ms": 53.878708,
+            "change_percent": 457.68848013454397
+          },
+          "p95_ms": {
+            "combined": 151.233458,
+            "tickers": 217.636875,
+            "difference_ms": 66.40341699999999,
+            "change_percent": 43.90788776383066
+          },
+          "p99_ms": {
+            "combined": 171.257875,
+            "tickers": 237.522792,
+            "difference_ms": 66.264917,
+            "change_percent": 38.69306272777238
+          }
+        }
+      }
+    }
+  ],
+  "negative_change_means_lower_latency": true,
+  "degraded_shared_lab": true
+}

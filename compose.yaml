@@ -1,0 +1,31 @@
+name: nse-mtbt-local
+services:
+  nats:
+    image: nats:2.11.8-alpine
+    command: ["-js", "-sd", "/data", "-m", "8222"]
+    ports:
+      - "127.0.0.1:14222:4222"
+      - "127.0.0.1:18222:8222"
+    volumes:
+      - nats-data:/data
+    restart: "no"
+  postgres:
+    image: postgres:17.7
+    environment:
+      POSTGRES_DB: mtbt
+      POSTGRES_USER: mtbt
+      # Deliberately local-only development credential, not a production secret.
+      POSTGRES_PASSWORD: local-dev-only
+    ports:
+      - "127.0.0.1:15432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mtbt -d mtbt"]
+      interval: 2s
+      timeout: 2s
+      retries: 20
+    restart: "no"
+volumes:
+  nats-data:
+  postgres-data:

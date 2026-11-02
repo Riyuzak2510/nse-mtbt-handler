@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: outcome-relay
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector:
+    matchLabels: {app: outcome-relay}
+  template:
+    metadata:
+      labels: {app: outcome-relay}
+    spec:
+      nodeSelector: {mtbt.lane: b}
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 30
+      securityContext: {runAsNonRoot: true, runAsUser: 10001, runAsGroup: 10001, fsGroup: 10001, seccompProfile: {type: RuntimeDefault}}
+      containers:
+        - name: outcome-relay
+          image: nse-mtbt-handler:lab
+          imagePullPolicy: IfNotPresent
+          command: [/app/outcome-relay]
+          args: ["-manifest=/config/manifest.json", "-http=0.0.0.0:19005", "-allow-non-loopback", "-stream-max-bytes=67108864", "-stream-max-age=24h", "-dedup-window=10m", "-replicas=1", "-delivery-mode=notify", "-reconcile-interval=5s"]
+          env:
+            - name: NATS_URL
+              valueFrom: {secretKeyRef: {name: mtbt-credentials, key: NATS_URL}}
+            - name: DATABASE_URL
+              valueFrom: {secretKeyRef: {name: mtbt-credentials, key: DATABASE_URL}}
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}
+          ports: [{name: http, containerPort: 19005}]
+          resources:
+            requests: {cpu: 50m, memory: 32Mi}
+            limits: {cpu: "1", memory: 128Mi}
+          startupProbe: {httpGet: {path: /healthz, port: http}, periodSeconds: 2, failureThreshold: 60}
+          livenessProbe: {httpGet: {path: /healthz, port: http}, periodSeconds: 10}
+          readinessProbe: {httpGet: {path: /readyz, port: http}, periodSeconds: 2}
+          volumeMounts: [{name: source, mountPath: /config, readOnly: true}]
+      volumes: [{name: source, configMap: {name: mtbt-source}}]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: outcome-relay
+spec:
+  selector: {app: outcome-relay}
+  ports: [{name: http, port: 19005, targetPort: http}]

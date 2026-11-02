@@ -1,0 +1,17 @@
+# Fresh-state optional overlay; NEVER apply over retained reconstruction state.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: nse-mtbt-matching
+resources:
+  - ../kubernetes
+  - matching-service.yaml
+  - service.yaml
+  - storage.yaml
+patches:
+  - target:
+      kind: Deployment
+      name: book-service
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 0

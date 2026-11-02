@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: order-service}
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector: {matchLabels: {app: order-service}}
+  template:
+    metadata: {labels: {app: order-service}}
+    spec:
+      nodeSelector: {mtbt.lane: a}
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 30
+      securityContext: {runAsNonRoot: true, runAsUser: 10001, runAsGroup: 10001, seccompProfile: {type: RuntimeDefault}}
+      containers:
+        - name: order-service
+          image: nse-mtbt-handler:lab
+          imagePullPolicy: IfNotPresent
+          command: [/app/order-service]
+          args: ["-manifest=/config/manifest.json", "-http=0.0.0.0:19006", "-allow-non-loopback"]
+          env:
+            - {name: NATS_URL, valueFrom: {secretKeyRef: {name: mtbt-credentials, key: NATS_URL}}}
+            - {name: DATABASE_URL, valueFrom: {secretKeyRef: {name: mtbt-credentials, key: DATABASE_URL}}}
+            - {name: GOMEMLIMIT, value: 192MiB}
+          resources: {requests: {cpu: 100m, memory: 128Mi}, limits: {cpu: "1", memory: 256Mi}}
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}
+          ports: [{name: http, containerPort: 19006}]
+          startupProbe: {httpGet: {path: /healthz, port: http}, periodSeconds: 2, failureThreshold: 60}
+          livenessProbe: {httpGet: {path: /healthz, port: http}, periodSeconds: 10}
+          readinessProbe: {httpGet: {path: /readyz, port: http}, periodSeconds: 2}
+          volumeMounts: [{name: config, mountPath: /config, readOnly: true}]
+      volumes: [{name: config, configMap: {name: mtbt-source}}]
+---
+apiVersion: v1
+kind: Service
+metadata: {name: order-service}
+spec:
+  selector: {app: order-service}
+  ports: [{name: http, port: 19006, targetPort: http}]

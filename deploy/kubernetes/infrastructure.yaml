@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  serviceName: postgres
+  replicas: 1
+  selector:
+    matchLabels: {app: postgres}
+  template:
+    metadata:
+      labels: {app: postgres}
+    spec:
+      nodeSelector: {mtbt.lane: a}
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 30
+      securityContext: {runAsNonRoot: true, runAsUser: 999, runAsGroup: 999, fsGroup: 999, seccompProfile: {type: RuntimeDefault}}
+      containers:
+        - name: postgres
+          image: postgres:17.7
+          args: ["-c", "fsync=on", "-c", "synchronous_commit=on", "-c", "full_page_writes=on"]
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}
+          ports: [{name: postgres, containerPort: 5432}]
+          env:
+            - {name: PGDATA, value: /var/lib/postgresql/data/pgdata}
+            - {name: POSTGRES_DB, value: mtbt}
+            - {name: POSTGRES_USER, value: mtbt}
+            - name: POSTGRES_PASSWORD
+              valueFrom: {secretKeyRef: {name: mtbt-credentials, key: POSTGRES_PASSWORD}}
+          resources:
+            requests: {cpu: 250m, memory: 256Mi}
+            limits: {cpu: "2", memory: 1Gi}
+          startupProbe:
+            exec: {command: [pg_isready, -U, mtbt, -d, mtbt]}
+            periodSeconds: 2
+            timeoutSeconds: 2
+            failureThreshold: 60
+          livenessProbe:
+            exec: {command: [pg_isready, -U, mtbt, -d, mtbt]}
+            periodSeconds: 10
+            timeoutSeconds: 3
+          readinessProbe:
+            exec: {command: [pg_isready, -U, mtbt, -d, mtbt]}
+            periodSeconds: 3
+            timeoutSeconds: 2
+          volumeMounts:
+            - {name: data, mountPath: /var/lib/postgresql/data}
+            - {name: tmp, mountPath: /tmp}
+            - {name: socket, mountPath: /var/run/postgresql}
+      volumes:
+        - {name: data, persistentVolumeClaim: {claimName: postgres-data}}
+        - {name: tmp, emptyDir: {}}
+        - {name: socket, emptyDir: {}}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nats
+spec:
+  serviceName: nats
+  replicas: 1
+  selector:
+    matchLabels: {app: nats}
+  template:
+    metadata:
+      labels: {app: nats}
+    spec:
+      nodeSelector: {mtbt.lane: b}
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 30
+      securityContext: {runAsNonRoot: true, runAsUser: 10001, runAsGroup: 10001, fsGroup: 10001, seccompProfile: {type: RuntimeDefault}}
+      containers:
+        - name: nats
+          image: nats:2.11.8-alpine
+          args: ["--config", /etc/nats/nats.conf]
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}
+          ports:
+            - {name: client, containerPort: 4222}
+            - {name: monitor, containerPort: 8222}
+          resources:
+            requests: {cpu: 100m, memory: 128Mi}
+            limits: {cpu: "1", memory: 256Mi}
+          startupProbe:
+            httpGet: {path: /healthz, port: monitor}
+            periodSeconds: 2
+            failureThreshold: 60
+          livenessProbe:
+            httpGet: {path: /healthz, port: monitor}
+            periodSeconds: 10
+          readinessProbe:
+            httpGet: {path: "/healthz?js-enabled-only=true", port: monitor}
+            periodSeconds: 3
+          volumeMounts:
+            - {name: config, mountPath: /etc/nats, readOnly: true}
+            - {name: data, mountPath: /data}
+      volumes:
+        - {name: config, secret: {secretName: mtbt-credentials, items: [{key: nats.conf, path: nats.conf}]}}
+        - {name: data, persistentVolumeClaim: {claimName: nats-data}}

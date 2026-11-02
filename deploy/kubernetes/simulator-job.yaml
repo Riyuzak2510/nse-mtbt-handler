@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: simulator
+  namespace: nse-mtbt-lab
+  labels: {app.kubernetes.io/part-of: nse-mtbt}
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels: {app: simulator, app.kubernetes.io/part-of: nse-mtbt}
+    spec:
+      nodeSelector: {mtbt.lane: b}
+      restartPolicy: Never
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 30
+      securityContext: {runAsNonRoot: true, runAsUser: 10001, runAsGroup: 10001, fsGroup: 10001, seccompProfile: {type: RuntimeDefault}}
+      containers:
+        - name: simulator
+          image: nse-mtbt-handler:lab
+          imagePullPolicy: IfNotPresent
+          command: [/app/simulator]
+          args: ["-manifest=/config/manifest.json", "-addr=publisher:19001", "-allow-non-loopback", "-rate=100", "-count=10000", "-expected=/evidence/expected.json"]
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}
+          resources:
+            requests: {cpu: 100m, memory: 128Mi}
+            limits: {cpu: "1", memory: 256Mi}
+          volumeMounts:
+            - {name: run, mountPath: /config, readOnly: true}
+            - {name: evidence, mountPath: /evidence}
+      volumes:
+        - {name: run, configMap: {name: mtbt-source}}
+        - {name: evidence, persistentVolumeClaim: {claimName: source-evidence}}

@@ -1,0 +1,29 @@
+# Generated/runtime state and credentials
+/bin/
+/run/
+/benchmarks/
+/verification/
+/.cache/
+/.pytest_cache/
+__pycache__/
+*.py[cod]
+*.test
+coverage.out
+.env
+.env.*
+*.kubeconfig
+kubeconfig
+*.pem
+*.key
+*.p12
+*.pfx
+.DS_Store
+# One canonical Markdown document in the public repository.
+*.[mM][dD]
+!/README.md
+# Prevent go build output at repository root.
+/book-service
+/load-source
+/matching-service
+/outcome-relay
+/ticker-workload

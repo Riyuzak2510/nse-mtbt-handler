@@ -1,0 +1,18 @@
+# Static two-instrument proof. A matching deployment is explicitly configured
+# per manifest token; do not scale a matcher to multiple active replicas.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: nse-mtbt-tickers
+resources:
+  - ../outcomes
+  - order-service.yaml
+  - matchers.yaml
+patches:
+  - target: {kind: Deployment, name: matching-service}
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 0
+      - op: replace
+        path: /spec/template/spec/containers/0/command
+        value: ["/app/matching-service"]

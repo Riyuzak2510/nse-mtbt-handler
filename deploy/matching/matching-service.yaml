@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matching-service
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector:
+    matchLabels: {app: matching-service}
+  template:
+    metadata:
+      labels: {app: matching-service}
+    spec:
+      nodeSelector: {mtbt.lane: b}
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      securityContext: {runAsNonRoot: true, runAsUser: 10001, runAsGroup: 10001, fsGroup: 10001, seccompProfile: {type: RuntimeDefault}}
+      containers:
+        - name: matching-service
+          image: nse-mtbt-handler:lab
+          imagePullPolicy: IfNotPresent
+          command: [/app/matching-service]
+          args:
+            - "-manifest=/config/manifest.json"
+            - "-http=0.0.0.0:19004"
+            - "-allow-non-loopback"
+            - "-mode=durable"
+            - "-max-active=100000"
+            - "-stale-after=5s"
+          env:
+            - name: NATS_URL
+              valueFrom: {secretKeyRef: {name: mtbt-credentials, key: NATS_URL}}
+            - name: DATABASE_URL
+              valueFrom: {secretKeyRef: {name: mtbt-credentials, key: DATABASE_URL}}
+            - name: GOMEMLIMIT
+              value: "384MiB"
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}
+          ports: [{name: http, containerPort: 19004}]
+          resources:
+            requests: {cpu: 100m, memory: 256Mi}
+            limits: {cpu: "1", memory: 512Mi}
+          startupProbe:
+            httpGet: {path: /healthz, port: http}
+            periodSeconds: 2
+            failureThreshold: 60
+          livenessProbe:
+            httpGet: {path: /healthz, port: http}
+            periodSeconds: 10
+          # Readiness reflects database state; initially REBUILDING from database load
+          readinessProbe:
+            httpGet: {path: /readyz, port: http}
+            periodSeconds: 2
+          volumeMounts:
+            - {name: run, mountPath: /config, readOnly: true}
+            - {name: evidence, mountPath: /evidence}
+      volumes:
+        - {name: run, configMap: {name: mtbt-source}}
+        - {name: evidence, persistentVolumeClaim: {claimName: matching-evidence}}

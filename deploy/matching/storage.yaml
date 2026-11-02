@@ -1,0 +1,11 @@
+# Matching trace evidence survives controlled restart; no order data is stored here.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: matching-evidence
+spec:
+  accessModes: [ReadWriteOnce]
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 128Mi

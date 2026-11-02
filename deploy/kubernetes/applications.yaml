@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: publisher
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector:
+    matchLabels: {app: publisher}
+  template:
+    metadata:
+      labels: {app: publisher}
+    spec:
+      nodeSelector: {mtbt.lane: a}
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 30
+      securityContext: {runAsNonRoot: true, runAsUser: 10001, runAsGroup: 10001, fsGroup: 10001, seccompProfile: {type: RuntimeDefault}}
+      containers:
+        - name: publisher
+          image: nse-mtbt-handler:lab
+          imagePullPolicy: IfNotPresent
+          command: [/app/publisher]
+          args: ["-manifest=/config/manifest.json", "-listen=0.0.0.0:19001", "-allow-non-loopback", "-health-http=0.0.0.0:19003"]
+          env:
+            - name: NATS_URL
+              valueFrom: {secretKeyRef: {name: mtbt-credentials, key: NATS_URL}}
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}
+          ports:
+            - {name: udp, containerPort: 19001, protocol: UDP}
+            - {name: health, containerPort: 19003}
+          resources:
+            requests: {cpu: 100m, memory: 128Mi}
+            limits: {cpu: "1", memory: 256Mi}
+          startupProbe:
+            httpGet: {path: /healthz, port: health}
+            periodSeconds: 2
+            failureThreshold: 60
+          livenessProbe:
+            httpGet: {path: /healthz, port: health}
+            periodSeconds: 10
+          readinessProbe:
+            httpGet: {path: /readyz, port: health}
+            periodSeconds: 2
+          volumeMounts:
+            - {name: run, mountPath: /config, readOnly: true}
+            - {name: evidence, mountPath: /evidence}
+      volumes:
+        - {name: run, configMap: {name: mtbt-source}}
+        - {name: evidence, persistentVolumeClaim: {claimName: publisher-evidence}}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-service
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector:
+    matchLabels: {app: book-service}
+  template:
+    metadata:
+      labels: {app: book-service}
+    spec:
+      nodeSelector: {mtbt.lane: b}
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 30
+      securityContext: {runAsNonRoot: true, runAsUser: 10001, runAsGroup: 10001, fsGroup: 10001, seccompProfile: {type: RuntimeDefault}}
+      containers:
+        - name: book-service
+          image: nse-mtbt-handler:lab
+          imagePullPolicy: IfNotPresent
+          command: [/app/book-service]
+          args: ["-manifest=/config/manifest.json", "-http=0.0.0.0:19002", "-allow-non-loopback", "-shards=0"]
+          env:
+            - name: NATS_URL
+              valueFrom: {secretKeyRef: {name: mtbt-credentials, key: NATS_URL}}
+            - name: DATABASE_URL
+              valueFrom: {secretKeyRef: {name: mtbt-credentials, key: DATABASE_URL}}
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}
+          ports: [{name: http, containerPort: 19002}]
+          resources:
+            requests: {cpu: 100m, memory: 128Mi}
+            limits: {cpu: "1", memory: 256Mi}
+          startupProbe:
+            httpGet: {path: /healthz, port: http}
+            periodSeconds: 2
+            failureThreshold: 60
+          livenessProbe:
+            httpGet: {path: /healthz, port: http}
+            periodSeconds: 10
+          # Deliberately false before first data, during catch-up, and after freshness expires.
+          readinessProbe:
+            httpGet: {path: /readyz, port: http}
+            periodSeconds: 2
+          volumeMounts:
+            - {name: run, mountPath: /config, readOnly: true}
+            - {name: evidence, mountPath: /evidence}
+      volumes:
+        - {name: run, configMap: {name: mtbt-source}}
+        - {name: evidence, persistentVolumeClaim: {claimName: book-evidence}}

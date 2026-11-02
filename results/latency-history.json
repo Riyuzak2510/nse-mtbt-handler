@@ -1,0 +1,1573 @@
+{
+  "scope": "Selected descriptive local-lab measurements; not production performance guarantees. Original large raw evidence is intentionally not published.",
+  "units": "milliseconds unless noted",
+  "milestones": [
+    {
+      "name": "serial-vs-three-subscribers-100eps",
+      "original_result_sha256": "ba8fa4a90f62621c237185eb37b4fdebe9b27cf36b5ecd268a8e4cd22efaa3ec",
+      "date": "2026-10-20",
+      "requested_rate": 100,
+      "measured_events_each": 10000,
+      "boundary": "source UDP send to book transaction commit observed",
+      "send_to_commit": {
+        "mean_ms": {
+          "serial": 5.0155542,
+          "parallel": 179.6348671,
+          "absolute_delta_ms": 174.6193129,
+          "ratio_parallel_over_serial": 35.815556952808926,
+          "relative_change_percent": 3481.5556952808925
+        },
+        "p50_ms": {
+          "serial": 3.78,
+          "parallel": 8.495,
+          "absolute_delta_ms": 4.715,
+          "ratio_parallel_over_serial": 2.247354497354497,
+          "relative_change_percent": 124.73544973544972
+        },
+        "p95_ms": {
+          "serial": 7.526,
+          "parallel": 1289.007,
+          "absolute_delta_ms": 1281.481,
+          "ratio_parallel_over_serial": 171.2738506510763,
+          "relative_change_percent": 17027.385065107628
+        },
+        "p99_ms": {
+          "serial": 33.284,
+          "parallel": 1993.783,
+          "absolute_delta_ms": 1960.4989999999998,
+          "ratio_parallel_over_serial": 59.90214517485879,
+          "relative_change_percent": 5890.214517485879
+        },
+        "max_ms": {
+          "serial": 155.887,
+          "parallel": 2120.156,
+          "absolute_delta_ms": 1964.269,
+          "ratio_parallel_over_serial": 13.600595303007948,
+          "relative_change_percent": 1260.0595303007947
+        }
+      }
+    },
+    {
+      "name": "serial-vs-three-subscribers-1000eps",
+      "original_result_sha256": "fb9e1c2b24b60bad07f0fec30c9748c6aaa2661d8a7eca115b5ec26b450fe979",
+      "date": "2026-10-20",
+      "requested_rate": 1000,
+      "measured_events_each": 10000,
+      "boundary": "source UDP send to book transaction commit observed",
+      "send_to_commit": {
+        "mean_ms": {
+          "serial": 15546.1518734,
+          "parallel": 30932.660741900003,
+          "absolute_delta_ms": 15386.508868500003,
+          "ratio_parallel_over_serial": 1.9897310275751807,
+          "relative_change_percent": 98.97310275751808
+        },
+        "p50_ms": {
+          "serial": 15650.072,
+          "parallel": 30788.81,
+          "absolute_delta_ms": 15138.738000000001,
+          "ratio_parallel_over_serial": 1.967327051274908,
+          "relative_change_percent": 96.73270512749079
+        },
+        "p95_ms": {
+          "serial": 27422.258,
+          "parallel": 56425.635,
+          "absolute_delta_ms": 29003.377,
+          "ratio_parallel_over_serial": 2.0576582351460626,
+          "relative_change_percent": 105.76582351460627
+        },
+        "p99_ms": {
+          "serial": 30879.149,
+          "parallel": 60822.898,
+          "absolute_delta_ms": 29943.749,
+          "ratio_parallel_over_serial": 1.9697077144192023,
+          "relative_change_percent": 96.97077144192023
+        },
+        "max_ms": {
+          "serial": 31662.368,
+          "parallel": 62191.762,
+          "absolute_delta_ms": 30529.394000000004,
+          "ratio_parallel_over_serial": 1.9642170162383308,
+          "relative_change_percent": 96.42170162383307
+        }
+      }
+    },
+    {
+      "name": "host-vs-kubernetes-reconstruction",
+      "original_result_sha256": "00f13f32a2dd69b1b25ae9f77d031f883bf1518a3e29ef56d1799a77056b30c0",
+      "date": "2026-10-20",
+      "boundary": "source UDP send to book transaction commit observed",
+      "causal_attribution": false,
+      "measured_events_each": 10000,
+      "requested_rate": 100,
+      "metrics": {
+        "send_to_commit": {
+          "mean_ms": {
+            "before_ms": 5.0155542,
+            "after_ms": 1.5067358294,
+            "delta_ms": -3.5088183706000002,
+            "relative_change_percent": -69.95873697466972
+          },
+          "p50_ms": {
+            "before_ms": 3.78,
+            "after_ms": 1.377417,
+            "delta_ms": -2.402583,
+            "relative_change_percent": -63.56039682539682
+          },
+          "p95_ms": {
+            "before_ms": 7.526,
+            "after_ms": 2.259,
+            "delta_ms": -5.2669999999999995,
+            "relative_change_percent": -69.98405527504652
+          },
+          "p99_ms": {
+            "before_ms": 33.284,
+            "after_ms": 4.228458,
+            "delta_ms": -29.055542,
+            "relative_change_percent": -87.29582381925249
+          },
+          "p999_ms": {
+            "before_ms": 131.193,
+            "after_ms": 10.722083,
+            "delta_ms": -120.47091700000001,
+            "relative_change_percent": -91.82724459384266
+          },
+          "max_ms": {
+            "before_ms": 155.887,
+            "after_ms": 21.948,
+            "delta_ms": -133.939,
+            "relative_change_percent": -85.92057066978003
+          }
+        },
+        "receive_to_commit": {
+          "mean_ms": {
+            "before_ms": 4.8630914,
+            "after_ms": 1.4163414715,
+            "delta_ms": -3.4467499285,
+            "relative_change_percent": -70.87569706174965
+          },
+          "p50_ms": {
+            "before_ms": 3.63,
+            "after_ms": 1.292208,
+            "delta_ms": -2.337792,
+            "relative_change_percent": -64.40198347107437
+          },
+          "p95_ms": {
+            "before_ms": 7.392,
+            "after_ms": 2.134917,
+            "delta_ms": -5.257083,
+            "relative_change_percent": -71.11854707792207
+          },
+          "p99_ms": {
+            "before_ms": 33.157,
+            "after_ms": 4.093208,
+            "delta_ms": -29.063791999999996,
+            "relative_change_percent": -87.65507132732154
+          },
+          "p999_ms": {
+            "before_ms": 131.07,
+            "after_ms": 10.621375,
+            "delta_ms": -120.44862499999999,
+            "relative_change_percent": -91.89641031509879
+          },
+          "max_ms": {
+            "before_ms": 155.786,
+            "after_ms": 21.854416,
+            "delta_ms": -133.931584,
+            "relative_change_percent": -85.97151477026176
+          }
+        },
+        "send_to_receive": {
+          "mean_ms": {
+            "before_ms": 0.15246279999999998,
+            "after_ms": 0.0903943579,
+            "delta_ms": -0.06206844209999998,
+            "relative_change_percent": -40.71054847477548
+          },
+          "p50_ms": {
+            "before_ms": 0.133,
+            "after_ms": 0.082667,
+            "delta_ms": -0.050333,
+            "relative_change_percent": -37.84436090225564
+          },
+          "p95_ms": {
+            "before_ms": 0.205,
+            "after_ms": 0.146416,
+            "delta_ms": -0.058584,
+            "relative_change_percent": -28.57756097560976
+          },
+          "p99_ms": {
+            "before_ms": 0.255,
+            "after_ms": 0.224459,
+            "delta_ms": -0.030541000000000013,
+            "relative_change_percent": -11.97686274509805
+          },
+          "p999_ms": {
+            "before_ms": 1.975,
+            "after_ms": 0.480291,
+            "delta_ms": -1.494709,
+            "relative_change_percent": -75.68146835443038
+          },
+          "max_ms": {
+            "before_ms": 36.363,
+            "after_ms": 3.091958,
+            "delta_ms": -33.271042,
+            "relative_change_percent": -91.4969666969172
+          }
+        },
+        "receiver_to_delivery": {
+          "mean_ms": {
+            "before_ms": 1.5425996000000002,
+            "after_ms": 0.2767580219,
+            "delta_ms": -1.2658415781000003,
+            "relative_change_percent": -82.05898524153643
+          },
+          "p50_ms": {
+            "before_ms": 0.651,
+            "after_ms": 0.254792,
+            "delta_ms": -0.396208,
+            "relative_change_percent": -60.861443932411674
+          },
+          "p95_ms": {
+            "before_ms": 1.698,
+            "after_ms": 0.395917,
+            "delta_ms": -1.3020829999999999,
+            "relative_change_percent": -76.68333333333332
+          },
+          "p99_ms": {
+            "before_ms": 25.422,
+            "after_ms": 0.732084,
+            "delta_ms": -24.689916,
+            "relative_change_percent": -97.12027377861695
+          },
+          "p999_ms": {
+            "before_ms": 122.881,
+            "after_ms": 2.873959,
+            "delta_ms": -120.007041,
+            "relative_change_percent": -97.66118521170888
+          },
+          "max_ms": {
+            "before_ms": 147.426,
+            "after_ms": 11.806041,
+            "delta_ms": -135.619959,
+            "relative_change_percent": -91.99188677709495
+          }
+        },
+        "db_process": {
+          "mean_ms": {
+            "before_ms": 3.3168913396,
+            "after_ms": 1.1358858949,
+            "delta_ms": -2.1810054447000002,
+            "relative_change_percent": -65.75450388323598
+          },
+          "p50_ms": {
+            "before_ms": 2.916542,
+            "after_ms": 1.030666,
+            "delta_ms": -1.885876,
+            "relative_change_percent": -64.66136952596602
+          },
+          "p95_ms": {
+            "before_ms": 5.402916,
+            "after_ms": 1.729166,
+            "delta_ms": -3.67375,
+            "relative_change_percent": -67.99568973495053
+          },
+          "p99_ms": {
+            "before_ms": 8.867875,
+            "after_ms": 3.224375,
+            "delta_ms": -5.6434999999999995,
+            "relative_change_percent": -63.63982352029094
+          },
+          "p999_ms": {
+            "before_ms": 19.562125,
+            "after_ms": 8.460292,
+            "delta_ms": -11.101833000000001,
+            "relative_change_percent": -56.751671917033555
+          },
+          "max_ms": {
+            "before_ms": 51.294291,
+            "after_ms": 21.589791,
+            "delta_ms": -29.7045,
+            "relative_change_percent": -57.90995337083419
+          }
+        },
+        "publish_confirm": {
+          "mean_ms": {
+            "before_ms": 0.730750452,
+            "after_ms": 0.20774404259999998,
+            "delta_ms": -0.5230064094,
+            "relative_change_percent": -71.57113731077104
+          },
+          "p50_ms": {
+            "before_ms": 0.610208,
+            "after_ms": 0.191958,
+            "delta_ms": -0.41825,
+            "relative_change_percent": -68.54220200325135
+          },
+          "p95_ms": {
+            "before_ms": 1.391417,
+            "after_ms": 0.303,
+            "delta_ms": -1.088417,
+            "relative_change_percent": -78.2236382047941
+          },
+          "p99_ms": {
+            "before_ms": 2.428208,
+            "after_ms": 0.505958,
+            "delta_ms": -1.92225,
+            "relative_change_percent": -79.16331714581288
+          },
+          "p999_ms": {
+            "before_ms": 7.24725,
+            "after_ms": 1.731541,
+            "delta_ms": -5.515709,
+            "relative_change_percent": -76.10761323260547
+          },
+          "max_ms": {
+            "before_ms": 45.815625,
+            "after_ms": 5.002417,
+            "delta_ms": -40.813207999999996,
+            "relative_change_percent": -89.08141709296774
+          }
+        },
+        "consumer_ack": {
+          "mean_ms": {
+            "before_ms": 0.5327801119,
+            "after_ms": 0.120784405,
+            "delta_ms": -0.4119957069,
+            "relative_change_percent": -77.32940807995652
+          },
+          "p50_ms": {
+            "before_ms": 0.437,
+            "after_ms": 0.108583,
+            "delta_ms": -0.328417,
+            "relative_change_percent": -75.15263157894736
+          },
+          "p95_ms": {
+            "before_ms": 1.055833,
+            "after_ms": 0.1975,
+            "delta_ms": -0.858333,
+            "relative_change_percent": -81.29439030604271
+          },
+          "p99_ms": {
+            "before_ms": 1.687916,
+            "after_ms": 0.324958,
+            "delta_ms": -1.362958,
+            "relative_change_percent": -80.7479756101607
+          },
+          "p999_ms": {
+            "before_ms": 3.499,
+            "after_ms": 0.722,
+            "delta_ms": -2.777,
+            "relative_change_percent": -79.36553300943126
+          },
+          "max_ms": {
+            "before_ms": 48.567708,
+            "after_ms": 2.377875,
+            "delta_ms": -46.189833,
+            "relative_change_percent": -95.10399996639742
+          }
+        },
+        "send_to_ack": {
+          "mean_ms": {
+            "before_ms": 5.5484108,
+            "after_ms": 1.6275746852,
+            "delta_ms": -3.9208361148,
+            "relative_change_percent": -70.66593041019962
+          },
+          "p50_ms": {
+            "before_ms": 4.274,
+            "after_ms": 1.485458,
+            "delta_ms": -2.788542,
+            "relative_change_percent": -65.2443144595227
+          },
+          "p95_ms": {
+            "before_ms": 8.52,
+            "after_ms": 2.439625,
+            "delta_ms": -6.080375,
+            "relative_change_percent": -71.36590375586854
+          },
+          "p99_ms": {
+            "before_ms": 35.044,
+            "after_ms": 4.530042,
+            "delta_ms": -30.513957999999995,
+            "relative_change_percent": -87.07327359890424
+          },
+          "p999_ms": {
+            "before_ms": 131.652,
+            "after_ms": 10.999167,
+            "delta_ms": -120.65283299999999,
+            "relative_change_percent": -91.64527162519369
+          },
+          "max_ms": {
+            "before_ms": 156.874,
+            "after_ms": 22.077542,
+            "delta_ms": -134.796458,
+            "relative_change_percent": -85.92657674311867
+          }
+        }
+      },
+      "limitations": "Same reconstruction workload, different host/container network/storage environments; not Kubernetes-only causal attribution."
+    },
+    {
+      "name": "poll-vs-notify",
+      "original_result_sha256": "85df59a6ede661fb06e0f2d401b3415aad4f0620ad29a29218487c81a80f2e0c",
+      "date": "2026-11-01",
+      "same_image": "sha256:e44f3b1b8286eb1ec7f351a58a3a5a60452c6ab9ef8c213625a84933a3329460",
+      "comparisons": [
+        {
+          "requested_rate": 100,
+          "actual_rate_poll": 99.90892278019305,
+          "actual_rate_notify": 99.79846579643866,
+          "both_rate_targets_met": true,
+          "events": 10000,
+          "changes": {
+            "send_to_commit": {
+              "mean_ms": {
+                "poll": 2.2582747316000003,
+                "notify": 2.3255203513000002,
+                "absolute_ms": 0.06724561969999998,
+                "percent": 2.9777430867481858
+              },
+              "p50_ms": {
+                "poll": 2.034292,
+                "notify": 2.039459,
+                "absolute_ms": 0.0051669999999997,
+                "percent": 0.2539950017008241
+              },
+              "p95_ms": {
+                "poll": 2.766417,
+                "notify": 2.893958,
+                "absolute_ms": 0.1275409999999999,
+                "percent": 4.610331703427217
+              },
+              "p99_ms": {
+                "poll": 4.252375,
+                "notify": 5.290541,
+                "absolute_ms": 1.0381660000000004,
+                "percent": 24.413792292542414
+              }
+            },
+            "db_process": {
+              "mean_ms": {
+                "poll": 1.7347142044,
+                "notify": 1.7722956174000002,
+                "absolute_ms": 0.037581413000000286,
+                "percent": 2.1664325399928908
+              },
+              "p50_ms": {
+                "poll": 1.655917,
+                "notify": 1.654,
+                "absolute_ms": -0.0019170000000001686,
+                "percent": -0.11576667188030187
+              },
+              "p95_ms": {
+                "poll": 2.316666,
+                "notify": 2.391917,
+                "absolute_ms": 0.07525099999999973,
+                "percent": 3.2482455390634435
+              },
+              "p99_ms": {
+                "poll": 3.298834,
+                "notify": 3.904458,
+                "absolute_ms": 0.6056240000000002,
+                "percent": 18.358729175217682
+              }
+            },
+            "receive_to_delivery": {
+              "mean_ms": {
+                "poll": 0.4140115686,
+                "notify": 0.43313096380000005,
+                "absolute_ms": 0.019119395200000056,
+                "percent": 4.618082355682285
+              },
+              "p50_ms": {
+                "poll": 0.275958,
+                "notify": 0.280167,
+                "absolute_ms": 0.004209000000000018,
+                "percent": 1.525232100537055
+              },
+              "p95_ms": {
+                "poll": 0.355625,
+                "notify": 0.373458,
+                "absolute_ms": 0.017832999999999988,
+                "percent": 5.014551845342696
+              },
+              "p99_ms": {
+                "poll": 0.494833,
+                "notify": 0.65175,
+                "absolute_ms": 0.15691700000000003,
+                "percent": 31.711102533582046
+              }
+            },
+            "send_to_all_outcomes_stored": {
+              "mean_ms": {
+                "poll": 53.7280335854,
+                "notify": 3.2399767976000002,
+                "absolute_ms": -50.4880567878,
+                "percent": -93.96967173114554
+              },
+              "p50_ms": {
+                "poll": 53.83675,
+                "notify": 2.853875,
+                "absolute_ms": -50.982875,
+                "percent": -94.69902065039216
+              },
+              "p95_ms": {
+                "poll": 99.351,
+                "notify": 4.238,
+                "absolute_ms": -95.113,
+                "percent": -95.73431570895109
+              },
+              "p99_ms": {
+                "poll": 103.3025,
+                "notify": 7.491208,
+                "absolute_ms": -95.811292,
+                "percent": -92.74828005130563
+              }
+            },
+            "transaction_start_to_outcome_stored": {
+              "mean_ms": {
+                "poll": 52.98399215174607,
+                "notify": 2.450985956378255,
+                "absolute_ms": -50.53300619536782,
+                "percent": -95.3741010127009
+              },
+              "p50_ms": {
+                "poll": 53.142546,
+                "notify": 2.195503,
+                "absolute_ms": -50.947043,
+                "percent": -95.86865296216708
+              },
+              "p95_ms": {
+                "poll": 98.858505,
+                "notify": 3.434634,
+                "absolute_ms": -95.42387099999999,
+                "percent": -96.5257071204951
+              },
+              "p99_ms": {
+                "poll": 102.802344,
+                "notify": 5.533544,
+                "absolute_ms": -97.2688,
+                "percent": -94.61729783126346
+              }
+            },
+            "client_commit_observation_to_outcome_stored": {
+              "mean_ms": {
+                "poll": 51.26048165642626,
+                "notify": 0.6911340403816153,
+                "absolute_ms": -50.569347616044645,
+                "percent": -98.65172152494792
+              },
+              "p50_ms": {
+                "poll": 51.378041,
+                "notify": 0.37475,
+                "absolute_ms": -51.003291000000004,
+                "percent": -99.2706027853417
+              },
+              "p95_ms": {
+                "poll": 97.23,
+                "notify": 1.291709,
+                "absolute_ms": -95.938291,
+                "percent": -98.67149130926668
+              },
+              "p99_ms": {
+                "poll": 101.182875,
+                "notify": 1.94125,
+                "absolute_ms": -99.241625,
+                "percent": -98.0814441178905
+              }
+            }
+          }
+        },
+        {
+          "requested_rate": 1000,
+          "actual_rate_poll": 720.6012379171696,
+          "actual_rate_notify": 504.4821670181785,
+          "both_rate_targets_met": false,
+          "events": 10000,
+          "changes": {
+            "send_to_commit": {
+              "mean_ms": {
+                "poll": 1644.0116220922,
+                "notify": 4.0001749743,
+                "absolute_ms": -1640.0114471179,
+                "percent": -99.75668207447285
+              },
+              "p50_ms": {
+                "poll": 1646.743167,
+                "notify": 1.797916,
+                "absolute_ms": -1644.945251,
+                "percent": -99.89081989006972
+              },
+              "p95_ms": {
+                "poll": 3063.318501,
+                "notify": 16.753584,
+                "absolute_ms": -3046.564917,
+                "percent": -99.45309036606768
+              },
+              "p99_ms": {
+                "poll": 3188.548876,
+                "notify": 36.179542,
+                "absolute_ms": -3152.369334,
+                "percent": -98.86532891898503
+              }
+            },
+            "db_process": {
+              "mean_ms": {
+                "poll": 1.4967288726999999,
+                "notify": 1.5026977762,
+                "absolute_ms": 0.005968903500000122,
+                "percent": 0.39879657624515286
+              },
+              "p50_ms": {
+                "poll": 1.440416,
+                "notify": 1.42425,
+                "absolute_ms": -0.016165999999999903,
+                "percent": -1.122314664652424
+              },
+              "p95_ms": {
+                "poll": 2.107292,
+                "notify": 2.123667,
+                "absolute_ms": 0.01637500000000003,
+                "percent": 0.7770636437665068
+              },
+              "p99_ms": {
+                "poll": 2.922583,
+                "notify": 2.905084,
+                "absolute_ms": -0.01749899999999993,
+                "percent": -0.5987511731916584
+              }
+            },
+            "receive_to_delivery": {
+              "mean_ms": {
+                "poll": 1642.4403671391,
+                "notify": 2.4236218693,
+                "absolute_ms": -1640.0167452698001,
+                "percent": -99.85243775556238
+              },
+              "p50_ms": {
+                "poll": 1645.148918,
+                "notify": 0.197458,
+                "absolute_ms": -1644.95146,
+                "percent": -99.98799756071686
+              },
+              "p95_ms": {
+                "poll": 3061.88096,
+                "notify": 14.991292,
+                "absolute_ms": -3046.889668,
+                "percent": -99.51038945681285
+              },
+              "p99_ms": {
+                "poll": 3187.316251,
+                "notify": 34.354292,
+                "absolute_ms": -3152.961959,
+                "percent": -98.92215615600675
+              }
+            },
+            "send_to_all_outcomes_stored": {
+              "mean_ms": {
+                "poll": 1700.233977307,
+                "notify": 4.8453985563,
+                "absolute_ms": -1695.3885787507,
+                "percent": -99.7150157789474
+              },
+              "p50_ms": {
+                "poll": 1711.714917,
+                "notify": 2.789458,
+                "absolute_ms": -1708.925459,
+                "percent": -99.8370372325265
+              },
+              "p95_ms": {
+                "poll": 3124.100252,
+                "notify": 17.65525,
+                "absolute_ms": -3106.4450020000004,
+                "percent": -99.43486928792706
+              },
+              "p99_ms": {
+                "poll": 3258.152085,
+                "notify": 37.227334,
+                "absolute_ms": -3220.924751,
+                "percent": -98.85740956748495
+              }
+            },
+            "transaction_start_to_outcome_stored": {
+              "mean_ms": {
+                "poll": 57.52371038159237,
+                "notify": 2.1227832488750225,
+                "absolute_ms": -55.40092713271735,
+                "percent": -96.30972474690313
+              },
+              "p50_ms": {
+                "poll": 57.447134,
+                "notify": 1.99284,
+                "absolute_ms": -55.454294,
+                "percent": -96.53100187730863
+              },
+              "p95_ms": {
+                "poll": 102.367337,
+                "notify": 3.249928,
+                "absolute_ms": -99.11740900000001,
+                "percent": -96.82522951632512
+              },
+              "p99_ms": {
+                "poll": 114.939673,
+                "notify": 4.399219,
+                "absolute_ms": -110.540454,
+                "percent": -96.17258437824162
+              }
+            },
+            "client_commit_observation_to_outcome_stored": {
+              "mean_ms": {
+                "poll": 56.01894853686927,
+                "notify": 0.6198598036239276,
+                "absolute_ms": -55.39908873324534,
+                "percent": -98.89348190243885
+              },
+              "p50_ms": {
+                "poll": 55.916834,
+                "notify": 0.382167,
+                "absolute_ms": -55.534667,
+                "percent": -99.31654392306976
+              },
+              "p95_ms": {
+                "poll": 101.061875,
+                "notify": 1.358458,
+                "absolute_ms": -99.703417,
+                "percent": -98.65581555853777
+              },
+              "p99_ms": {
+                "poll": 113.55625,
+                "notify": 2.004417,
+                "absolute_ms": -111.551833,
+                "percent": -98.23486862237878
+              }
+            }
+          }
+        }
+      ],
+      "limitations": "High-rate arms not rate matched; negative commit-observation residuals retained. Notification endpoint is broker storage, not client delivery."
+    },
+    {
+      "name": "combined-vs-tickers",
+      "original_result_sha256": "60988fc5250cf202fc232445483f87bb9ce1e60a507f400a0b12c8c3bf63cb10",
+      "date": "2026-11-02",
+      "comparison": {
+        "combined": "nse-mtbt-ticker-bench-combined-r2",
+        "tickers": "nse-mtbt-ticker-bench-tickers-r2",
+        "pairs": [
+          {
+            "requested_rate": 100,
+            "events": 10000,
+            "actual_rate_combined": 85.36421371316492,
+            "actual_rate_tickers": 86.2914590465158,
+            "actual_rates_within_five_percent_of_each_other": true,
+            "both_rates_within_five_percent": false,
+            "deltas": {
+              "send_to_matching_commit": {
+                "mean_ms": {
+                  "combined": 2.8973072689999997,
+                  "tickers": 5.138176802,
+                  "difference_ms": 2.2408695330000006,
+                  "change_percent": 77.34317850841663
+                },
+                "p50_ms": {
+                  "combined": 2.415542,
+                  "tickers": 4.522458,
+                  "difference_ms": 2.1069160000000005,
+                  "change_percent": 87.22332296436991
+                },
+                "p95_ms": {
+                  "combined": 3.784042,
+                  "tickers": 7.131458,
+                  "difference_ms": 3.3474160000000004,
+                  "change_percent": 88.46138599941544
+                },
+                "p99_ms": {
+                  "combined": 7.636333,
+                  "tickers": 11.380041,
+                  "difference_ms": 3.7437080000000007,
+                  "change_percent": 49.02494430245512
+                }
+              },
+              "matching_process": {
+                "mean_ms": {
+                  "combined": 2.1930569156,
+                  "tickers": 2.1914375047,
+                  "difference_ms": -0.0016194109000000623,
+                  "change_percent": -0.07384262982326195
+                },
+                "p50_ms": {
+                  "combined": 2.003208,
+                  "tickers": 2.011209,
+                  "difference_ms": 0.008001000000000147,
+                  "change_percent": 0.39940934740676504
+                },
+                "p95_ms": {
+                  "combined": 3.164709,
+                  "tickers": 3.37925,
+                  "difference_ms": 0.21454099999999965,
+                  "change_percent": 6.779169901561244
+                },
+                "p99_ms": {
+                  "combined": 5.40625,
+                  "tickers": 5.368208,
+                  "difference_ms": -0.03804199999999991,
+                  "change_percent": -0.7036670520231159
+                }
+              },
+              "send_to_all_outcomes_stored": {
+                "mean_ms": {
+                  "combined": 4.0157824213,
+                  "tickers": 6.0470026839,
+                  "difference_ms": 2.0312202625999998,
+                  "change_percent": 50.58093416182761
+                },
+                "p50_ms": {
+                  "combined": 3.444125,
+                  "tickers": 5.373583,
+                  "difference_ms": 1.929458,
+                  "change_percent": 56.02171814321488
+                },
+                "p95_ms": {
+                  "combined": 5.428375,
+                  "tickers": 8.359834,
+                  "difference_ms": 2.9314589999999994,
+                  "change_percent": 54.002514564671735
+                },
+                "p99_ms": {
+                  "combined": 10.995083,
+                  "tickers": 14.568916,
+                  "difference_ms": 3.5738330000000005,
+                  "change_percent": 32.503920161403066
+                }
+              }
+            }
+          },
+          {
+            "requested_rate": 1000,
+            "events": 10000,
+            "actual_rate_combined": 498.317884125774,
+            "actual_rate_tickers": 500.8449286002767,
+            "actual_rates_within_five_percent_of_each_other": true,
+            "both_rates_within_five_percent": false,
+            "deltas": {
+              "send_to_matching_commit": {
+                "mean_ms": {
+                  "combined": 41.492974050899996,
+                  "tickers": 82.9815498136,
+                  "difference_ms": 41.4885757627,
+                  "change_percent": 99.98939992058753
+                },
+                "p50_ms": {
+                  "combined": 11.008833,
+                  "tickers": 63.160292,
+                  "difference_ms": 52.151459,
+                  "change_percent": 473.7237725379248
+                },
+                "p95_ms": {
+                  "combined": 150.391834,
+                  "tickers": 215.663958,
+                  "difference_ms": 65.27212400000002,
+                  "change_percent": 43.401375103916905
+                },
+                "p99_ms": {
+                  "combined": 170.495125,
+                  "tickers": 235.715167,
+                  "difference_ms": 65.220042,
+                  "change_percent": 38.25331780014238
+                }
+              },
+              "matching_process": {
+                "mean_ms": {
+                  "combined": 1.6598014617999999,
+                  "tickers": 2.5222682012,
+                  "difference_ms": 0.8624667394000003,
+                  "change_percent": 51.96204240383566
+                },
+                "p50_ms": {
+                  "combined": 1.489666,
+                  "tickers": 2.4275,
+                  "difference_ms": 0.9378340000000003,
+                  "change_percent": 62.955991477284186
+                },
+                "p95_ms": {
+                  "combined": 2.648625,
+                  "tickers": 3.692292,
+                  "difference_ms": 1.0436670000000001,
+                  "change_percent": 39.404105904006805
+                },
+                "p99_ms": {
+                  "combined": 3.922083,
+                  "tickers": 4.90075,
+                  "difference_ms": 0.9786670000000002,
+                  "change_percent": 24.95273557443838
+                }
+              },
+              "send_to_all_outcomes_stored": {
+                "mean_ms": {
+                  "combined": 42.3069454613,
+                  "tickers": 84.9609256065,
+                  "difference_ms": 42.653980145199995,
+                  "change_percent": 100.82027827846245
+                },
+                "p50_ms": {
+                  "combined": 11.771917,
+                  "tickers": 65.650625,
+                  "difference_ms": 53.878708,
+                  "change_percent": 457.68848013454397
+                },
+                "p95_ms": {
+                  "combined": 151.233458,
+                  "tickers": 217.636875,
+                  "difference_ms": 66.40341699999999,
+                  "change_percent": 43.90788776383066
+                },
+                "p99_ms": {
+                  "combined": 171.257875,
+                  "tickers": 237.522792,
+                  "difference_ms": 66.264917,
+                  "change_percent": 38.69306272777238
+                }
+              }
+            }
+          }
+        ],
+        "negative_change_means_lower_latency": true,
+        "degraded_shared_lab": true
+      },
+      "limitations": "Primary pair source traffic sequential; shared degraded local kind infrastructure. Source missed requested rates. Calibration tails sometimes opposite direction."
+    },
+    {
+      "name": "handoff",
+      "original_result_sha256": "eb8f25a8c9e5e04b10aa1666321a6a4e75c44254dd364ebf1408a7c66edb2e16",
+      "date": "2026-11-02",
+      "stages": [
+        {
+          "stage": 1,
+          "count": 10000,
+          "requested_rate": 100,
+          "actual_send_rate": 86.2914590465158,
+          "distributions": {
+            "send_to_admission_commit_observed": {
+              "count": 10000,
+              "negative_count": 0,
+              "min_ms": 1.103708,
+              "mean_ms": 2.3433128927,
+              "p50_ms": 1.91225,
+              "p95_ms": 3.067583,
+              "p99_ms": 5.593,
+              "max_ms": 302.9605
+            },
+            "admission_commit_observed_to_routed_timestamp": {
+              "count": 10000,
+              "negative_count": 2,
+              "min_ms": -0.492625,
+              "mean_ms": 0.4164218825,
+              "p50_ms": 0.376084,
+              "p95_ms": 0.633125,
+              "p99_ms": 1.142875,
+              "max_ms": 26.103583
+            },
+            "routed_timestamp_to_matching_delivery": {
+              "count": 10000,
+              "negative_count": 0,
+              "min_ms": 0.073458,
+              "mean_ms": 0.1415963633,
+              "p50_ms": 0.124541,
+              "p95_ms": 0.224792,
+              "p99_ms": 0.388958,
+              "max_ms": 3.132459
+            },
+            "matching_delivery_to_process_start": {
+              "count": 10000,
+              "negative_count": 0,
+              "min_ms": 0.016291,
+              "mean_ms": 0.0454097011,
+              "p50_ms": 0.041625,
+              "p95_ms": 0.057875,
+              "p99_ms": 0.127792,
+              "max_ms": 1.024667
+            },
+            "matching_process_wall_interval": {
+              "count": 10000,
+              "negative_count": 0,
+              "min_ms": 0.781125,
+              "mean_ms": 2.1914359624,
+              "p50_ms": 2.011208,
+              "p95_ms": 3.379208,
+              "p99_ms": 5.368208,
+              "max_ms": 210.814292
+            },
+            "admission_commit_observed_to_matching_delivery": {
+              "count": 10000,
+              "negative_count": 1,
+              "min_ms": -0.359458,
+              "mean_ms": 0.5580182458,
+              "p50_ms": 0.506333,
+              "p95_ms": 0.831417,
+              "p99_ms": 1.477459,
+              "max_ms": 28.253
+            },
+            "admission_commit_observed_to_matching_process_start": {
+              "count": 10000,
+              "negative_count": 1,
+              "min_ms": -0.325375,
+              "mean_ms": 0.6034279469,
+              "p50_ms": 0.548959,
+              "p95_ms": 0.896375,
+              "p99_ms": 1.549875,
+              "max_ms": 28.301708
+            },
+            "admission_commit_observed_to_matching_commit_observed": {
+              "count": 10000,
+              "negative_count": 0,
+              "min_ms": 1.354,
+              "mean_ms": 2.7948639093,
+              "p50_ms": 2.572417,
+              "p95_ms": 4.178416,
+              "p99_ms": 6.371333,
+              "max_ms": 220.866459
+            },
+            "send_to_matching_commit_observed": {
+              "count": 10000,
+              "negative_count": 0,
+              "min_ms": 2.69575,
+              "mean_ms": 5.138176802,
+              "p50_ms": 4.522458,
+              "p95_ms": 7.131458,
+              "p99_ms": 11.380041,
+              "max_ms": 319.530792
+            },
+            "matching_process_monotonic_duration": {
+              "count": 10000,
+              "negative_count": 0,
+              "min_ms": 0.781125,
+              "mean_ms": 2.1914375047,
+              "p50_ms": 2.011209,
+              "p95_ms": 3.37925,
+              "p99_ms": 5.368208,
+              "max_ms": 210.81425
+            },
+            "matching_process_wall_minus_monotonic": {
+              "count": 10000,
+              "negative_count": 3220,
+              "min_ms": -0.00025,
+              "mean_ms": -1.5423e-06,
+              "p50_ms": 0.0,
+              "p95_ms": 4.2e-05,
+              "p99_ms": 4.2e-05,
+              "max_ms": 0.000375
+            },
+            "matching_ack_after_commit_duration": {
+              "count": 10000,
+              "negative_count": 0,
+              "min_ms": 0.047416,
+              "mean_ms": 0.1529213823,
+              "p50_ms": 0.12,
+              "p95_ms": 0.248,
+              "p99_ms": 0.39525,
+              "max_ms": 126.575792
+            }
+          },
+          "mean_share_of_total_percent": {
+            "send_to_admission_commit_observed": 45.60592176952497,
+            "admission_commit_observed_to_matching_delivery": 10.860238316104562,
+            "matching_delivery_to_process_start": 0.8837707001893081,
+            "matching_process_wall_interval": 42.65006921418116
+          },
+          "slowest_one_percent_by_end_to_end": {
+            "count": 100,
+            "distributions": {
+              "send_to_admission_commit_observed": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 1.83625,
+                "mean_ms": 32.1931734,
+                "p50_ms": 8.047792,
+                "p95_ms": 242.335,
+                "p99_ms": 294.936459,
+                "max_ms": 302.9605
+              },
+              "admission_commit_observed_to_routed_timestamp": {
+                "count": 100,
+                "negative_count": 1,
+                "min_ms": -0.169958,
+                "mean_ms": 1.6359855300000001,
+                "p50_ms": 0.746917,
+                "p95_ms": 4.014333,
+                "p99_ms": 22.089958,
+                "max_ms": 26.103583
+              },
+              "routed_timestamp_to_matching_delivery": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 0.080792,
+                "mean_ms": 0.32585791,
+                "p50_ms": 0.187542,
+                "p95_ms": 0.718958,
+                "p99_ms": 2.253584,
+                "max_ms": 2.8255
+              },
+              "matching_delivery_to_process_start": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 0.02025,
+                "mean_ms": 0.06528206,
+                "p50_ms": 0.048708,
+                "p95_ms": 0.182042,
+                "p99_ms": 0.3635,
+                "max_ms": 0.385584
+              },
+              "matching_process_wall_interval": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 1.548125,
+                "mean_ms": 9.66164919,
+                "p50_ms": 5.705792,
+                "p95_ms": 16.776959,
+                "p99_ms": 117.3935,
+                "max_ms": 210.814292
+              },
+              "admission_commit_observed_to_matching_delivery": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 0.365292,
+                "mean_ms": 1.96184344,
+                "p50_ms": 1.0295,
+                "p95_ms": 4.163916,
+                "p99_ms": 22.762,
+                "max_ms": 28.253
+              },
+              "admission_commit_observed_to_matching_process_start": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 0.410625,
+                "mean_ms": 2.0271255,
+                "p50_ms": 1.096042,
+                "p95_ms": 4.212625,
+                "p99_ms": 22.841708,
+                "max_ms": 28.301708
+              },
+              "admission_commit_observed_to_matching_commit_observed": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 2.077833,
+                "mean_ms": 11.688774689999999,
+                "p50_ms": 6.954709,
+                "p95_ms": 19.180708,
+                "p99_ms": 145.695208,
+                "max_ms": 220.866459
+              },
+              "send_to_matching_commit_observed": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 11.44625,
+                "mean_ms": 43.88194809,
+                "p50_ms": 15.564,
+                "p95_ms": 274.071834,
+                "p99_ms": 310.849667,
+                "max_ms": 319.530792
+              },
+              "matching_process_monotonic_duration": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 1.548167,
+                "mean_ms": 9.66165466,
+                "p50_ms": 5.705792,
+                "p95_ms": 16.776958,
+                "p99_ms": 117.3935,
+                "max_ms": 210.81425
+              },
+              "matching_process_wall_minus_monotonic": {
+                "count": 100,
+                "negative_count": 39,
+                "min_ms": -0.000125,
+                "mean_ms": -5.47e-06,
+                "p50_ms": 0.0,
+                "p95_ms": 4.2e-05,
+                "p99_ms": 4.2e-05,
+                "max_ms": 4.2e-05
+              },
+              "matching_ack_after_commit_duration": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 0.065042,
+                "mean_ms": 1.55347673,
+                "p50_ms": 0.204583,
+                "p95_ms": 1.07475,
+                "p99_ms": 2.228458,
+                "max_ms": 126.575792
+              }
+            }
+          },
+          "per_ticker": {
+            "1": {
+              "handoff": {
+                "count": 5000,
+                "negative_count": 0,
+                "min_ms": 0.205042,
+                "mean_ms": 0.5634177286000001,
+                "p50_ms": 0.508166,
+                "p95_ms": 0.82925,
+                "p99_ms": 1.387,
+                "max_ms": 28.253
+              },
+              "matching_process": {
+                "count": 5000,
+                "negative_count": 0,
+                "min_ms": 0.852875,
+                "mean_ms": 2.220106826,
+                "p50_ms": 2.044708,
+                "p95_ms": 3.349958,
+                "p99_ms": 5.501,
+                "max_ms": 117.3935
+              }
+            },
+            "2": {
+              "handoff": {
+                "count": 5000,
+                "negative_count": 1,
+                "min_ms": -0.359458,
+                "mean_ms": 0.552618763,
+                "p50_ms": 0.504541,
+                "p95_ms": 0.8315,
+                "p99_ms": 1.538375,
+                "max_ms": 12.792334
+              },
+              "matching_process": {
+                "count": 5000,
+                "negative_count": 0,
+                "min_ms": 0.781125,
+                "mean_ms": 2.1627681834,
+                "p50_ms": 1.976709,
+                "p95_ms": 3.390959,
+                "p99_ms": 5.275167,
+                "max_ms": 210.81425
+              }
+            }
+          }
+        },
+        {
+          "stage": 2,
+          "count": 10000,
+          "requested_rate": 1000,
+          "actual_send_rate": 500.8449286002767,
+          "distributions": {
+            "send_to_admission_commit_observed": {
+              "count": 10000,
+              "negative_count": 0,
+              "min_ms": 0.807167,
+              "mean_ms": 79.66092020110001,
+              "p50_ms": 59.427375,
+              "p95_ms": 212.34075,
+              "p99_ms": 232.620459,
+              "max_ms": 234.924084
+            },
+            "admission_commit_observed_to_routed_timestamp": {
+              "count": 10000,
+              "negative_count": 2,
+              "min_ms": -0.439041,
+              "mean_ms": 0.6140650436,
+              "p50_ms": 0.550042,
+              "p95_ms": 1.120083,
+              "p99_ms": 1.83175,
+              "max_ms": 6.776
+            },
+            "routed_timestamp_to_matching_delivery": {
+              "count": 10000,
+              "negative_count": 0,
+              "min_ms": 0.028666,
+              "mean_ms": 0.15541103169999998,
+              "p50_ms": 0.101583,
+              "p95_ms": 0.392417,
+              "p99_ms": 1.055459,
+              "max_ms": 6.858625
+            },
+            "matching_delivery_to_process_start": {
+              "count": 10000,
+              "negative_count": 0,
+              "min_ms": 0.012125,
+              "mean_ms": 0.0288726835,
+              "p50_ms": 0.023625,
+              "p95_ms": 0.0545,
+              "p99_ms": 0.134791,
+              "max_ms": 1.74075
+            },
+            "matching_process_wall_interval": {
+              "count": 10000,
+              "negative_count": 0,
+              "min_ms": 0.614834,
+              "mean_ms": 2.5222808537,
+              "p50_ms": 2.427458,
+              "p95_ms": 3.692334,
+              "p99_ms": 4.900584,
+              "max_ms": 26.831667
+            },
+            "admission_commit_observed_to_matching_delivery": {
+              "count": 10000,
+              "negative_count": 2,
+              "min_ms": -0.36875,
+              "mean_ms": 0.7694760753000001,
+              "p50_ms": 0.680792,
+              "p95_ms": 1.392209,
+              "p99_ms": 2.226916,
+              "max_ms": 7.040959
+            },
+            "admission_commit_observed_to_matching_process_start": {
+              "count": 10000,
+              "negative_count": 2,
+              "min_ms": -0.3485,
+              "mean_ms": 0.7983487588,
+              "p50_ms": 0.706666,
+              "p95_ms": 1.433375,
+              "p99_ms": 2.273958,
+              "max_ms": 7.083542
+            },
+            "admission_commit_observed_to_matching_commit_observed": {
+              "count": 10000,
+              "negative_count": 0,
+              "min_ms": 1.051167,
+              "mean_ms": 3.3206296125,
+              "p50_ms": 3.162167,
+              "p95_ms": 4.824166,
+              "p99_ms": 6.478,
+              "max_ms": 27.54325
+            },
+            "send_to_matching_commit_observed": {
+              "count": 10000,
+              "negative_count": 0,
+              "min_ms": 2.53925,
+              "mean_ms": 82.9815498136,
+              "p50_ms": 63.160292,
+              "p95_ms": 215.663958,
+              "p99_ms": 235.715167,
+              "max_ms": 239.20075
+            },
+            "matching_process_monotonic_duration": {
+              "count": 10000,
+              "negative_count": 0,
+              "min_ms": 0.614834,
+              "mean_ms": 2.5222682012,
+              "p50_ms": 2.4275,
+              "p95_ms": 3.692292,
+              "p99_ms": 4.90075,
+              "max_ms": 26.831625
+            },
+            "matching_process_wall_minus_monotonic": {
+              "count": 10000,
+              "negative_count": 3220,
+              "min_ms": -0.085458,
+              "mean_ms": 1.26525e-05,
+              "p50_ms": 0.0,
+              "p95_ms": 4.2e-05,
+              "p99_ms": 4.2e-05,
+              "max_ms": 0.230902
+            },
+            "matching_ack_after_commit_duration": {
+              "count": 10000,
+              "negative_count": 0,
+              "min_ms": 0.034208,
+              "mean_ms": 0.13678722229999998,
+              "p50_ms": 0.110667,
+              "p95_ms": 0.278292,
+              "p99_ms": 0.498125,
+              "max_ms": 5.419583
+            }
+          },
+          "mean_share_of_total_percent": {
+            "send_to_admission_commit_observed": 95.99835189875452,
+            "admission_commit_observed_to_matching_delivery": 0.9272857364419689,
+            "matching_delivery_to_process_start": 0.034794100091955625,
+            "matching_process_wall_interval": 3.03956826471156
+          },
+          "slowest_one_percent_by_end_to_end": {
+            "count": 100,
+            "distributions": {
+              "send_to_admission_commit_observed": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 230.828792,
+                "mean_ms": 233.42411974,
+                "p50_ms": 233.422875,
+                "p95_ms": 234.689792,
+                "p99_ms": 234.898667,
+                "max_ms": 234.924084
+              },
+              "admission_commit_observed_to_routed_timestamp": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 0.243458,
+                "mean_ms": 0.6525716500000001,
+                "p50_ms": 0.611,
+                "p95_ms": 1.133666,
+                "p99_ms": 1.696666,
+                "max_ms": 2.061417
+              },
+              "routed_timestamp_to_matching_delivery": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 0.062625,
+                "mean_ms": 0.14270538,
+                "p50_ms": 0.109125,
+                "p95_ms": 0.251334,
+                "p99_ms": 0.468708,
+                "max_ms": 1.601459
+              },
+              "matching_delivery_to_process_start": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 0.014791,
+                "mean_ms": 0.03254169,
+                "p50_ms": 0.025,
+                "p95_ms": 0.0575,
+                "p99_ms": 0.239958,
+                "max_ms": 0.24025
+              },
+              "matching_process_wall_interval": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 1.201625,
+                "mean_ms": 2.66978665,
+                "p50_ms": 2.5735,
+                "p95_ms": 3.719333,
+                "p99_ms": 4.677667,
+                "max_ms": 4.872333
+              },
+              "admission_commit_observed_to_matching_delivery": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 0.332125,
+                "mean_ms": 0.79527703,
+                "p50_ms": 0.732125,
+                "p95_ms": 1.413208,
+                "p99_ms": 2.143125,
+                "max_ms": 2.181
+              },
+              "admission_commit_observed_to_matching_process_start": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 0.352541,
+                "mean_ms": 0.82781872,
+                "p50_ms": 0.766375,
+                "p95_ms": 1.443583,
+                "p99_ms": 2.169458,
+                "max_ms": 2.219292
+              },
+              "admission_commit_observed_to_matching_commit_observed": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 2.208833,
+                "mean_ms": 3.49760537,
+                "p50_ms": 3.397166,
+                "p95_ms": 4.698,
+                "p99_ms": 5.359541,
+                "max_ms": 5.790916
+              },
+              "send_to_matching_commit_observed": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 235.717376,
+                "mean_ms": 236.92172511,
+                "p50_ms": 236.807167,
+                "p95_ms": 238.51375,
+                "p99_ms": 238.788167,
+                "max_ms": 239.20075
+              },
+              "matching_process_monotonic_duration": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 1.201584,
+                "mean_ms": 2.66979081,
+                "p50_ms": 2.573458,
+                "p95_ms": 3.719291,
+                "p99_ms": 4.677708,
+                "max_ms": 4.872333
+              },
+              "matching_process_wall_minus_monotonic": {
+                "count": 100,
+                "negative_count": 37,
+                "min_ms": -0.000125,
+                "mean_ms": -4.16e-06,
+                "p50_ms": 0.0,
+                "p95_ms": 4.2e-05,
+                "p99_ms": 4.2e-05,
+                "max_ms": 4.2e-05
+              },
+              "matching_ack_after_commit_duration": {
+                "count": 100,
+                "negative_count": 0,
+                "min_ms": 0.051417,
+                "mean_ms": 0.16953917999999998,
+                "p50_ms": 0.125459,
+                "p95_ms": 0.4555,
+                "p99_ms": 0.615958,
+                "max_ms": 0.797917
+              }
+            }
+          },
+          "per_ticker": {
+            "1": {
+              "handoff": {
+                "count": 5000,
+                "negative_count": 2,
+                "min_ms": -0.36875,
+                "mean_ms": 0.7807898713999999,
+                "p50_ms": 0.691666,
+                "p95_ms": 1.427708,
+                "p99_ms": 2.413917,
+                "max_ms": 7.040959
+              },
+              "matching_process": {
+                "count": 5000,
+                "negative_count": 0,
+                "min_ms": 0.836417,
+                "mean_ms": 2.6983969923999997,
+                "p50_ms": 2.597042,
+                "p95_ms": 3.847875,
+                "p99_ms": 5.13775,
+                "max_ms": 26.831625
+              }
+            },
+            "2": {
+              "handoff": {
+                "count": 5000,
+                "negative_count": 0,
+                "min_ms": 0.141625,
+                "mean_ms": 0.7581622792,
+                "p50_ms": 0.669208,
+                "p95_ms": 1.364166,
+                "p99_ms": 2.149208,
+                "max_ms": 6.430792
+              },
+              "matching_process": {
+                "count": 5000,
+                "negative_count": 0,
+                "min_ms": 0.614834,
+                "mean_ms": 2.34613941,
+                "p50_ms": 2.254666,
+                "p95_ms": 3.472959,
+                "p99_ms": 4.618833,
+                "max_ms": 26.292458
+              }
+            }
+          }
+        }
+      ],
+      "boundaries": {
+        "admission": "client observes successful admission transaction return",
+        "routed": "JetStream retained message timestamp, not exact disk-fsync instant",
+        "delivery": "matching Fetch(1) returned; includes transport, consumer wait and scheduling",
+        "process": "ProcessCommand: validation, engine work, SQL transaction and client commit response",
+        "ack": "confirmed input ACK after successful matching method return; not in send-to-commit latency"
+      },
+      "limitations": [
+        "Same shared/degraded Linux-VM environment as saved benchmark; source missed requested rates.",
+        "Admission client commit observation can follow dispatcher activity; signed negatives retained, not clamped.",
+        "No dispatcher-step/PubAck timing in saved traces; cannot isolate pure network RTT or dispatch SQL latency.",
+        "Per-input wall-clock slices telescope; their marginal percentiles must not be added/subtracted.",
+        "Monotonic method duration differs slightly from wall-clock endpoints; both retained.",
+        "No new worker design, runtime deployment or production capacity inference."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: nse-mtbt-lab
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: nse-mtbt
+    includeSelectors: false
+resources:
+  - storage.yaml
+  - services.yaml
+  - infrastructure.yaml
+  - applications.yaml
+# Immutable mtbt-source ConfigMap and generated Secrets are supplied by scripts/k8s_lab.py.
+# The simulator Job is deliberately separate and must be released only after startup.

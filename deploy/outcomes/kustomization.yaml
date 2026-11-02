@@ -1,0 +1,21 @@
+# FRESH native history only. Never apply over retained matching/reconstruction state.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: nse-mtbt-outcomes
+resources:
+  - ../matching
+  - relay.yaml
+patches:
+  - target:
+      kind: Deployment
+      name: matching-service
+    patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: "-outcomes"
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: "-outcomes-max-pending=100000"
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: "-outcomes-max-bytes=134217728"
